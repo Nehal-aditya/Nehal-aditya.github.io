@@ -1,0 +1,124 @@
+/* Basic styling for demonstration - you can adjust this */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out title and nav/hamburger */
+    align-items: center;
+    position: relative; /* For absolute positioning of nav on smaller screens */
+}
+
+h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Default to horizontal for larger screens */
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+nav li a:hover {
+    background-color: #555;
+}
+
+main {
+    padding: 1rem;
+}
+
+footer {
+    background-color: #eee;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* Hamburger Menu Styling */
+.hamburger {
+    display: none; /* Hidden by default on larger screens */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+.hamburger .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hide navigation by default on small screens */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show hamburger on small screens */
+    }
+
+    header nav {
+        display: none; /* Hide regular navigation by default */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        background-color: #333;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header nav.active {
+        display: flex; /* Show navigation when active */
+    }
+
+    header nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    header nav li {
+        text-align: center;
+        border-bottom: 1px solid #555;
+    }
+
+    header nav li:last-child {
+        border-bottom: none;
+    }
+
+    header nav li a {
+        padding: 1rem;
+    }
+
+    /* Animation for hamburger icon when active */
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
