@@ -174,3 +174,138 @@ header {
         font-size: 1.5rem; /* Make title slightly smaller on small screens */
     }
 }
+/* --- Existing Styles (keep as is) --- */
+/* (Your existing body, header, .header-left, .logo, .logo-link, h1, nav ul,
+    nav li a, nav li a:hover, main, footer, and hamburger styles should remain above this.) */
+
+/* --- New Submenu Styling --- */
+
+/* Parent list item for the submenu */
+.has-submenu {
+    position: relative; /* Needed for positioning the absolute submenu on desktop */
+}
+
+/* Desktop submenu (hidden by default) */
+.submenu {
+    display: none; /* Hidden by default */
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove default list margins */
+    background-color: #444; /* Slightly darker background than header */
+    position: absolute; /* Position relative to .has-submenu */
+    top: 100%; /* Position right below the parent link */
+    left: 0;
+    min-width: 160px; /* Ensure enough width for content */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1; /* Ensure it appears above other content */
+    flex-direction: column; /* Submenu items stack vertically */
+}
+
+.submenu li a {
+    color: white;
+    padding: 12px 16px; /* Adjust padding for submenu items */
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.submenu li a:hover {
+    background-color: #666; /* Hover effect for submenu items */
+}
+
+/* Show submenu on hover for desktop */
+.has-submenu:hover > .submenu {
+    display: flex; /* Use flex to ensure vertical stacking */
+}
+
+/* Submenu toggle icon style (initially hidden on desktop) */
+.submenu-toggle {
+    display: none; /* Hide toggle by default on desktop */
+    margin-left: 5px; /* Space from the link */
+    font-size: 0.8em; /* Smaller arrow */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Smooth rotation */
+    color: white; /* Make sure it's visible */
+}
+
+/* --- Media Query for Mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* (Your existing media query styles for hamburger, header, nav should remain above this.) */
+
+    /* Adjust main nav li to align link and toggle side-by-side on mobile */
+    header nav li {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        position: static; /* Important: removes absolute positioning context for mobile submenu to stack */
+        display: flex; /* To align link and toggle side-by-side */
+        justify-content: center; /* Center the content */
+        align-items: center; /* Vertically align them */
+        padding: 0; /* Remove padding from li directly as a is padded */
+    }
+
+    header nav li:last-child {
+        border-bottom: none;
+    }
+
+    header nav li a {
+        padding: 1rem; /* Padding for main nav links */
+        flex-grow: 1; /* Allow link to take available space */
+    }
+
+    /* Mobile Submenu Specifics */
+    .submenu-toggle {
+        display: inline-block; /* Show toggle on mobile */
+        order: 1; /* Position it after the link */
+        padding: 1rem; /* Make it easily tappable */
+        line-height: 1; /* Adjust vertical alignment */
+        flex-shrink: 0; /* Don't let it shrink */
+        align-self: stretch; /* Make it fill parent height */
+        display: flex; /* Use flex to center the arrow content */
+        align-items: center; /* Center arrow vertically */
+        justify-content: center; /* Center arrow horizontally */
+    }
+
+    /* Style the arrow icon content on mobile */
+    .submenu-toggle::before {
+        content: "▼"; /* Unicode for down arrow */
+    }
+
+    /* Rotate arrow when submenu is open */
+    .has-submenu.active > .submenu-toggle::before {
+        transform: rotate(180deg);
+    }
+
+    .submenu {
+        /* On mobile, submenu should stack below parent, not be absolute */
+        position: static;
+        width: 100%;
+        background-color: #555; /* Slightly different background for sub */
+        box-shadow: none; /* No shadow needed */
+        text-align: center;
+        /* Using max-height for smooth collapse/expand animation */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out; /* Smooth transition */
+        display: block; /* Ensure it behaves as a block for max-height transition */
+    }
+
+    /* When .has-submenu has 'active' class (toggled by JS), expand the submenu */
+    .has-submenu.active > .submenu {
+        max-height: 200px; /* Adjust this value if your submenu content is taller */
+        /* You can set it to a very large value like 500px or 100vh if you have many items */
+    }
+
+    .submenu li {
+        border-bottom: 1px solid #777; /* Separator for submenu items */
+        padding: 0; /* Reset li padding for submenu */
+        display: block; /* Submenu li should be block to take full width */
+    }
+
+    .submenu li:last-child {
+        border-bottom: none;
+    }
+
+    .submenu li a {
+        padding: 0.8rem 1rem; /* Adjust padding for mobile submenu links */
+    }
+}
