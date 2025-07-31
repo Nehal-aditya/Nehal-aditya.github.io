@@ -122,3 +122,55 @@ footer {
         transform: translateY(-8px) rotate(-45deg);
     }
 }
+/* New: Style for the left part of the header (logo + title) */
+.header-left {
+    display: flex; /* Use flexbox to align logo and title */
+    align-items: center; /* Vertically center them */
+    gap: 15px; /* Space between logo and title */
+}
+
+/* New: Style for the logo image */
+.logo {
+    height: 50px; /* Adjust logo height as needed */
+    width: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align with text baseline */
+}
+
+/* New: Style for the logo link, if you want to remove default link underline etc. */
+.logo-link {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent */
+}
+
+/* Adjust existing h1 margin for better alignment with logo */
+h1 {
+    margin: 0;
+    font-size: 1.8rem; /* Adjust font size if needed */
+}
+
+/* Update the header's flex-wrap property */
+header {
+    /* ... existing header styles ... */
+    flex-wrap: wrap; /* Add this to allow items to wrap on smaller screens */
+}
+
+/* Inside your @media (max-width: 768px) block: */
+@media (max-width: 768px) {
+    /* ... existing media query styles ... */
+
+    /* Header adjustments for small screens */
+    header {
+        flex-direction: row; /* Keep elements in a row */
+        justify-content: space-between; /* Space out elements */
+        align-items: center; /* Vertically align them */
+    }
+
+    .header-left {
+        flex-grow: 1; /* Allow left part to take available space */
+        justify-content: flex-start; /* Align logo/title to the start */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Make title slightly smaller on small screens */
+    }
+}
